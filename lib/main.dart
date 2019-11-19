@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Splash.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -9,18 +11,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '西咸环卫',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primaryIconTheme: const IconThemeData(color: Colors.white),
+        brightness: Brightness.light,
+        primaryColor: new Color.fromARGB(255, 0, 215, 198),
+        accentColor: Colors.cyan[300],
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: SplashPage(),
+//      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
