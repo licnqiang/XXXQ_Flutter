@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:xxxq_flutter/pages/LoginPage.dart';
 
 import 'main.dart';
 
@@ -35,8 +34,7 @@ class SplashState extends State<SplashPage>{
                   builder: (BuildContext context, Widget child) {
                     return Opacity(
                       opacity: animation.value,
-//                      child: new MyHomePage(title: '西咸环卫'),
-                        child: new LoginPage(),
+                      child: new MyApp(),
                     );
                   },
                 );
@@ -68,7 +66,7 @@ class SplashState extends State<SplashPage>{
         child: new Text(
           "西咸环卫",
           style: new TextStyle(
-              color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+              color: Colors.black, fontSize: 50.0, fontWeight: FontWeight.bold),
         ),
       ),
     );

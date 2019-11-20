@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   shared_preferences: ^0.4.3
   #groovin_material_icons: ^1.1.5
+  flutter_swiper: ^1.0.6
+
 
 dev_dependencies:
   flutter_test:
@@ -41,6 +43,17 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+      - images/main_ziyuan_sel.png
+      - images/main_ziyuan.png
+      - images/home_tab_msg_p.png
+      - images/home_tab_msg_n.png
+      - images/main_work_sel.png
+      - images/main_work.png
+      - images/main_wode_sel.png
+      - images/main_wode.png
+      - images/car_fault.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
