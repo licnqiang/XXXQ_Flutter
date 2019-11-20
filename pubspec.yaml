@@ -54,6 +54,7 @@ flutter:
       - images/main_wode_sel.png
       - images/main_wode.png
       - images/car_fault.png
+      - images/xh.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
