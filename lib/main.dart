@@ -1,108 +1,114 @@
 import 'package:flutter/material.dart';
-
-import 'Splash.dart';
+import 'package:flutter/cupertino.dart';
+import './util/ThemeUtils.dart';
+import './pages/CheckingPage.dart';
+import './pages/WorkStationPage.dart';
+import './pages/NewListPage.dart';
+import './pages/MyPage.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  final appBarTitles = ['首页', '考勤', '工作', '我的'];
+  final tabTextStyleSelected = TextStyle(color: Colors.blue, fontSize: 14.0);
+  final tabTextStyleNormal = TextStyle(color: Colors.grey, fontSize: 14.0);
+
+  Color themeColor = ThemeUtils.currentColorTheme;
+  int _tabIndex = 0;
+
+  var tabImages;
+  var _body;
+  var pages;
+
+  Image getTabImage(path) {
+    return Image.asset(path, width: 20.0, height: 20.0);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    pages = <Widget>[
+      NewListPage(),
+      CheckingPage(),
+      WorkStationPage(),
+      MyPage()
+    ];
+    if (tabImages == null) {
+      tabImages = [
+        [
+          getTabImage('images/main_ziyuan.png'),
+          getTabImage('images/main_ziyuan_sel.png')
+        ],
+        [
+          getTabImage('images/home_tab_msg_n.png'),
+          getTabImage('images/home_tab_msg_p.png')
+        ],
+        [
+          getTabImage('images/main_work.png'),
+          getTabImage('images/main_work_sel.png')
+        ],
+        [
+          getTabImage('images/main_wode.png'),
+          getTabImage('images/main_wode_sel.png')
+        ]
+      ];
+    }
+  }
+
+  //文字的样式
+  TextStyle getTabTextStyle(int curIndex) {
+    if (curIndex == _tabIndex) {
+      return tabTextStyleSelected;
+    }
+    return tabTextStyleNormal;
+  }
+
+  //获取需要显示的图标
+  Image getTabIcon(int curIndex) {
+    if (curIndex == _tabIndex) {
+      return tabImages[curIndex][1];
+    }
+    return tabImages[curIndex][0];
+  }
+
+  Text getTabTitle(int curIndex) {
+    return Text(appBarTitles[curIndex], style: getTabTextStyle(curIndex));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '西咸环卫',
-      theme: ThemeData(
-        primaryIconTheme: const IconThemeData(color: Colors.white),
-        brightness: Brightness.light,
-        primaryColor: new Color.fromARGB(255, 0, 215, 198),
-        accentColor: Colors.cyan[300],
-      ),
-      home: SplashPage(),
-//      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    _body = IndexedStack(
+      children: pages,
+      index: _tabIndex,
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    return MaterialApp(
+      theme: ThemeData(primaryColor: themeColor),
+      home: Scaffold(
+          body: _body,
+          bottomNavigationBar: CupertinoTabBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: getTabIcon(0), title: getTabTitle(0)),
+              BottomNavigationBarItem(
+                  icon: getTabIcon(1), title: getTabTitle(1)),
+              BottomNavigationBarItem(
+                  icon: getTabIcon(2), title: getTabTitle(2)),
+              BottomNavigationBarItem(
+                  icon: getTabIcon(3), title: getTabTitle(3)),
+            ],
+            currentIndex: _tabIndex,
+            onTap: (index) {
+              setState(() {
+                _tabIndex = index;
+              });
+            },
+            backgroundColor: Colors.white,
+          )),
     );
   }
 }
