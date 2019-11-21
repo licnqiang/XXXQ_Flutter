@@ -60,6 +60,10 @@ flutter:
       - images/station_apply.png
       - images/car_service.png
       - images/device_service.png
+      - images/icon_shangbao.png
+      - images/icon_edit.png
+      - images/icon_kaoqin.png
+      - images/icon_arraw_next.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
