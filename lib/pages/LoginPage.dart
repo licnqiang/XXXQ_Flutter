@@ -21,7 +21,6 @@ class LoginPageState extends State<LoginPage>{
   //密码的控制器
   TextEditingController pwdController = TextEditingController();
 
-  String _name,_password;
   bool _isObscure = true;
   Color _eyeColor;
   final _formKey = GlobalKey<FormState>();
