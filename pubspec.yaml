@@ -55,6 +55,11 @@ flutter:
       - images/main_wode.png
       - images/car_fault.png
       - images/xh.png
+      - images/background.png
+      - images/zhixingdingdan.png
+      - images/station_apply.png
+      - images/car_service.png
+      - images/device_service.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

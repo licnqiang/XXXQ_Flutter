@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:xxxq_flutter/Splash.dart';
-import 'package:xxxq_flutter/pages/LoginPage.dart';
 import './util/ThemeUtils.dart';
 import './pages/CheckingPage.dart';
 import './pages/WorkStationPage.dart';
 import './pages/NewListPage.dart';
 import './pages/MyPage.dart';
 
-void main() => runApp(
+void main() { runApp(
     new MaterialApp(home: new SplashPage(),));
+}
 
 class MyApp extends StatefulWidget {
   @override
