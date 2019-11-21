@@ -33,7 +33,7 @@ class SwiperViewDefaultPageState extends State<SwiperViewDefaultPage> {
 
         Container(
 
-          height: 200.0,
+          height: 150.0,
 
           child: new Swiper(
 
@@ -133,7 +133,7 @@ class SwiperViewDefaultPageState extends State<SwiperViewDefaultPage> {
 
           // 选中时的大小
 
-          activeSize: 12,
+          activeSize: 6,
 
           // 没选中时的颜色
 
