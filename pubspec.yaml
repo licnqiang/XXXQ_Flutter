@@ -16,8 +16,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
-
-
 dependencies:
   flutter:
     sdk: flutter
@@ -25,6 +23,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  shared_preferences: ^0.4.3
+  #groovin_material_icons: ^1.1.5
   flutter_swiper: ^1.0.6
 
 
@@ -54,6 +54,7 @@ flutter:
       - images/main_wode_sel.png
       - images/main_wode.png
       - images/car_fault.png
+      - images/xh.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
