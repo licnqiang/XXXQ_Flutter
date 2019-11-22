@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:xxxq_flutter/main.dart';
+import 'package:xxxq_flutter/util/DioUtil.dart';
 
 /**
  * 登录页
@@ -78,7 +79,7 @@ class LoginPageState extends State<LoginPage>{
               print({'name':nameController.text,'pwd':pwdController.text});
 
               Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyApp()));
-
+              request();
             }
           },
 //          shape: StadiumBorder(side: BorderSide(color: Colors.blue)),
@@ -89,6 +90,7 @@ class LoginPageState extends State<LoginPage>{
       ),
     );
   }
+
 
 
 
@@ -209,6 +211,24 @@ class LoginPageState extends State<LoginPage>{
 
       ),
     );
+  }
+
+  void request() {
+//    DioUtil().get('v2/5ca06a7d3300007200a87e01/:id',
+//        pathParams: {
+//          ':id': 12
+//        },
+//        data: {
+//          'name':'tony',
+//          'age': 23
+//        },
+//        errorCallback: (statusCode) {
+//          print('Http error code : $statusCode');
+//        }
+//    ).then((data) {
+//      print('Http response: $data');
+//    });
+
   }
 
 

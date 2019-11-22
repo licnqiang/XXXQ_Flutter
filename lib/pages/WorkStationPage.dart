@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'SendOrdersPage.dart';
+import 'TransOrderListPage.dart';
+
 class WorkStationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     Container buildButtonColumn(String image,String lab) {
       return Container(
         padding:
@@ -31,6 +35,7 @@ class WorkStationPage extends StatelessWidget {
       );
     }
 
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +60,12 @@ class WorkStationPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildButtonColumn("images/zhixingdingdan.png","执行订单"),
+                      GestureDetector(
+                        child: buildButtonColumn("images/send.png","派单"),
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (context)=>SendOrdersPage()));
+                        },
+                      ),
                       Opacity(
                         opacity: 0.0,
                         child: buildButtonColumn("",""),
@@ -76,7 +86,7 @@ class WorkStationPage extends StatelessWidget {
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.only(left: 15.0, top: 10.0, bottom: 10.0),
-                  child: Text("事件上报",
+                  child: Text("审批",
                       textAlign: TextAlign.left,
                       style: new TextStyle(
                           fontSize: 16.0,
@@ -87,9 +97,14 @@ class WorkStationPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildButtonColumn("images/car_fault.png","车辆故障"),
-                      buildButtonColumn("images/station_apply.png","费用维保"),
-                      buildButtonColumn("images/car_service.png","车辆维保"),
+                      buildButtonColumn("images/zhixingdingdan.png","垃圾运输"),
+                      buildButtonColumn("images/station_apply.png","行政报销"),
+                      GestureDetector(
+                        child:   buildButtonColumn("images/yundan.png","运单"),
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (context)=>TransOrderListPage()));
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -97,18 +112,10 @@ class WorkStationPage extends StatelessWidget {
             ),
           ),
           Container(
+            margin: EdgeInsets.only(top: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(left: 15.0, top: 10.0, bottom: 10.0),
-                  child: Text("记录",
-                      textAlign: TextAlign.left,
-                      style: new TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold)),
-                ),
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
