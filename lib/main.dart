@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:xxxq_flutter/Splash.dart';
-import './util/ThemeUtils.dart';
+import 'package:xxxq_flutter/utils/ThemeUtils.dart';
 import './pages/CheckingPage.dart';
 import './pages/WorkStationPage.dart';
 import './pages/NewListPage.dart';

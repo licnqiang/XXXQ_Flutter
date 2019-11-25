@@ -3,12 +3,30 @@ import 'package:flutter/cupertino.dart';
 import '../widgets/SwiperViewDefaultPage.dart';
 import '../widgets/HomeNewsItem.dart';
 
-class NewListPage extends StatelessWidget {
+class NewListPage extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() {
+    return new NewListState();
+  }
+
+}
+
+
+class NewListState extends State<NewListPage>{
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-        body: new ListView.builder(
+      body: new ListView.builder(
         padding: new EdgeInsets.all(0.0),
         itemBuilder: (BuildContext context, int index) {
           if (0 == index) {
@@ -30,12 +48,9 @@ class NewListPage extends StatelessWidget {
 
 
 
-
-
-
   //公告item
   Widget _NotiveItem() {
-   return new Container(
+    return new Container(
       color: Colors.white,
       padding: EdgeInsets.all(5.0),
       child: new Column(
@@ -60,4 +75,18 @@ class NewListPage extends StatelessWidget {
     );
 
   }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

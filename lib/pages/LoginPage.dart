@@ -1,7 +1,14 @@
 
+import 'dart:math';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:xxxq_flutter/http/HttpManager.dart';
+import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
+import 'package:xxxq_flutter/http/ResultData.dart';
 import 'package:xxxq_flutter/main.dart';
-import 'package:xxxq_flutter/util/DioUtil.dart';
+import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
 
 /**
  * 登录页
@@ -75,10 +82,12 @@ class LoginPageState extends State<LoginPage>{
             if (_formKey.currentState.validate()) {
               ///只有输入的内容符合要求通过才会到达此处
               _formKey.currentState.save();
-              //TODO 执行登录方法
               print({'name':nameController.text,'pwd':pwdController.text});
 
-              Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyApp()));
+              if(nameController.text.isEmpty||pwdController.text.isEmpty){
+                Fluttertoast.showToast(msg: "用户名或密码不能为空");
+                return;
+              }
               request();
             }
           },
@@ -134,31 +143,7 @@ class LoginPageState extends State<LoginPage>{
     );
 
 
-/*    return TextFormField(
-      onSaved: (String value)=> _password=value,
-      obscureText: _isObscure,
-      validator: (String value){
-        if(value.isEmpty){
-          return '请输入密码';
-        }
-      },
 
-      decoration: InputDecoration(
-        hintText: '请输入密码',
-        hintStyle: TextStyle(color: Color.fromARGB(255, 91, 91, 91),fontSize: 14.0),
-        suffixIcon: IconButton(icon: Icon(Icons.remove_red_eye,color: _eyeColor,),
-          onPressed: (){
-            setState(() {
-              _isObscure = !_isObscure;
-              _eyeColor = _isObscure
-                  ? Colors.grey
-                  : Theme.of(context).iconTheme.color;
-            });
-          },
-        )
-        ),
-
-    );*/
   }
 
   ConstrainedBox buildNameTextField(){
@@ -213,21 +198,31 @@ class LoginPageState extends State<LoginPage>{
     );
   }
 
-  void request() {
-//    DioUtil().get('v2/5ca06a7d3300007200a87e01/:id',
-//        pathParams: {
-//          ':id': 12
-//        },
-//        data: {
-//          'name':'tony',
-//          'age': 23
-//        },
-//        errorCallback: (statusCode) {
-//          print('Http error code : $statusCode');
-//        }
-//    ).then((data) {
-//      print('Http response: $data');
-//    });
+  void request() async{
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new LoadingDialog(
+            text: "登录中…",
+          );
+        });
+
+//    Map<String,String>map ={"username":"zhanz","password":"111111"};
+    FormData formData = new FormData.from({
+      "username": nameController.text,
+      "password": pwdController.text,
+    });
+
+    ResultData res  =await  HttpManager.getInstance().post(HttpRequestUrl.URL_Login, formData);
+    if(res.isSuccess){
+      Navigator.pop(context);//dismiss dialog
+      Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyApp()));
+
+    }else{
+      Fluttertoast.showToast(msg: res.data.toString());
+      Navigator.pop(context);
+    }
 
   }
 

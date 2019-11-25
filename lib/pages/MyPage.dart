@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:xxxq_flutter/pages/UserListPage.dart';
 
 
 
@@ -56,10 +57,17 @@ class MyPage extends StatelessWidget {
               children: <Widget>[
                 Image.asset(("images/icon_kaoqin.png"),width: 24.0,height: 24.0),
 
-                Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Text("我的考勤",style: buildTextStyle()),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, new MaterialPageRoute(builder: (context)=>new UserListPage()));
+
+                  },
+                 child: Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: Text("我的考勤",style: buildTextStyle()),
+                  ),
                 ),
+
 
                 Expanded(child:
                 Container(

@@ -14,7 +14,7 @@ class WorkStationPage extends StatelessWidget {
             EdgeInsets.only(top: 30.0, bottom: 30.0, left: 20.0, right: 20.0),
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: new AssetImage('./images/background.png'),
+              image: new AssetImage('images/background.png'),
               fit: BoxFit.fill),
         ),
         child: Center(
@@ -68,11 +68,11 @@ class WorkStationPage extends StatelessWidget {
                       ),
                       Opacity(
                         opacity: 0.0,
-                        child: buildButtonColumn("",""),
+                        // child: buildButtonColumn("",""),
                       ),
                       Opacity(
                         opacity: 0.0,
-                        child: buildButtonColumn("",""),
+                        // child: buildButtonColumn("",""),
                       ),
                     ],
                   ),
@@ -124,7 +124,7 @@ class WorkStationPage extends StatelessWidget {
                       buildButtonColumn("images/car_fault.png","车辆故障"),
                       Opacity(
                         opacity: 0.0,
-                        child: buildButtonColumn("",""),
+                        // child: buildButtonColumn("",""),
                       ),
                     ],
                   ),
