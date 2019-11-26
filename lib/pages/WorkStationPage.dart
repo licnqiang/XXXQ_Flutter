@@ -20,7 +20,7 @@ class WorkStationPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Image(
-                image: new AssetImage(image),
+                image: new AssetImage(""==image?"images/send.png":image),
                 height: 50.0,
                 width: 50.0,
               ),

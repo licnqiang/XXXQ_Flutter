@@ -22,4 +22,7 @@ class HttpRequestUrl{
   //查询司机
   static const String URL_DRIVER="v1/findRoleUser";
 
+  //派单
+  static const String URL_SEND_ORDER="tyd/toTyd";
+
 }

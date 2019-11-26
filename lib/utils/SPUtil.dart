@@ -13,6 +13,7 @@ class SPUtil{
   static const String SP_USER_NAME ="user_name";
   static const String SP_USER_PWD ="user_pwd";
   static const String SP_USER_ACCOUNT ="user_account";
+  static const String SP_USER_IDSYSDEPT ="user_idSysdept";
 
   static SPUtil _singleton;
   static SharedPreferences _prefs;

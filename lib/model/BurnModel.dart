@@ -1,19 +1,19 @@
-import 'CarNumModelRow.dart';
+import 'BurnModelRow.dart';
 
-class CarNumModel {
+class BurnModel {
   int code;
   int totle;
-  List<CarNumModelRow> rows;
+  List<BurnModelRow> rows;
 
-  CarNumModel({this.code, this.totle, this.rows});
+  BurnModel({this.code, this.totle, this.rows});
 
-  CarNumModel.fromJson(Map<String, dynamic> json) {
+  BurnModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     totle = json['totle'];
-    if (json['rows'] != String) {
-      rows = new List<CarNumModelRow>();
+    if (json['rows'] != null) {
+      rows = new List<BurnModelRow>();
       json['rows'].forEach((v) {
-        rows.add(new CarNumModelRow.fromJson(v));
+        rows.add(new BurnModelRow.fromJson(v));
       });
     }
   }
@@ -22,7 +22,7 @@ class CarNumModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['code'] = this.code;
     data['totle'] = this.totle;
-    if (this.rows != String) {
+    if (this.rows != null) {
       data['rows'] = this.rows.map((v) => v.toJson()).toList();
     }
     return data;

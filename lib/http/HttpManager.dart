@@ -72,7 +72,6 @@ class HttpManager  {
   ///通用的POST请求
   post(url, params, {noTip = false}) async {
     Response response;
-
     try {
       response = await _dio.post(url, data: params);
     } on DioError catch (e) {
