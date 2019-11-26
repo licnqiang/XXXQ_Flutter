@@ -30,14 +30,15 @@ class LoginPageState extends State<LoginPage>{
   void initState() {
     super.initState();
     _initSp();
+
   }
 
 
   //手机号的控制器
-  TextEditingController nameController = TextEditingController.fromValue(TextEditingValue(text: SPUtil.getString(SPUtil.SP_USER_ACCOUNT)));
+  TextEditingController nameController = TextEditingController();
 
   //密码的控制器
-  TextEditingController pwdController = TextEditingController(text: SPUtil.getString(SPUtil.SP_USER_PWD));
+  TextEditingController pwdController = TextEditingController();
 
   bool _isObscure = true;
   Color _eyeColor;
@@ -237,6 +238,7 @@ class LoginPageState extends State<LoginPage>{
       SPUtil.putString(SPUtil.SP_USER_PWD, pwdController.text);
 
       print("保存token:"+  SPUtil.getString(SPUtil.SP_TOKEN));
+      print("保存账号:"+  SPUtil.getString(SPUtil.SP_USER_ACCOUNT));
       Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyApp()));
 
     }else{
@@ -248,6 +250,8 @@ class LoginPageState extends State<LoginPage>{
 
   void _initSp() async{
     await SPUtil.getInstance();
+    nameController.text=SPUtil.getString(SPUtil.SP_USER_ACCOUNT);
+    pwdController.text=SPUtil.getString(SPUtil.SP_USER_PWD);
   }
 
 
