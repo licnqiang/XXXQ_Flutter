@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xxxq_flutter/constants/Constants.dart';
 import 'package:xxxq_flutter/widgets/TitleBar.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'SelectTypeItemPage.dart';
 
 class SendOrdersPage extends StatefulWidget {
   @override
@@ -8,8 +11,12 @@ class SendOrdersPage extends StatefulWidget {
 }
 
 class _SendOrdersState extends State<SendOrdersPage> {
+
   @override
   Widget build(BuildContext context) {
+    String endTime="";
+    String startTime="";
+
     return Scaffold(
       appBar: TitleBar().backAppbar(context, "派单"),
       body: Container(
@@ -17,12 +24,93 @@ class _SendOrdersState extends State<SendOrdersPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              HomeNewItem("压缩站", ""),
-              HomeNewItem("车牌", ""),
-              HomeNewItem("驾驶员", ""),
-              HomeNewItem("起运时间", ""),
-              HomeNewItem("焚烧厂", ""),
-              HomeNewItem("抵达时间", ""),
+              GestureDetector(
+                child: HomeNewItem("压缩站", ""),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => SelectTypeItemPage(
+                              type: Constants.compress_station_type)));
+                },
+              ),
+              GestureDetector(
+                child: HomeNewItem("车牌", ""),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => SelectTypeItemPage(
+                              type: Constants.car_num_type)));
+                },
+              ),
+              GestureDetector(
+                child: HomeNewItem("驾驶员", ""),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) =>
+                              SelectTypeItemPage(type: Constants.driver_type)));
+                },
+              ),
+              GestureDetector(
+                child:   HomeNewItem("起运时间", startTime),
+                onTap: () {
+                  DatePicker.showDateTimePicker(context,
+                      // 是否展示顶部操作按钮
+                      showTitleActions: true,
+                      // change事件
+                      onChanged: (date) {
+                        print('change $date');
+                      },
+                      // 确定事件
+                      onConfirm: (date) {
+                        print('confirm $date');
+                        setState(() {
+                          startTime='$date';
+                        });
+                      },
+                      // 当前时间
+                      currentTime: DateTime.now(),
+                      // 语言
+                      locale: LocaleType.zh);
+                },
+              ),
+              GestureDetector(
+                child: HomeNewItem("焚烧厂", ""),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => SelectTypeItemPage(
+                              type: Constants.burn_station_type)));
+                },
+              ),
+
+              GestureDetector(
+                child: HomeNewItem("抵达时间", endTime),
+                onTap: () {
+                  DatePicker.showDateTimePicker(context,
+                      // 是否展示顶部操作按钮
+                      showTitleActions: true,
+                      // change事件
+                      onChanged: (date) {
+                        print('change $date');
+                      },
+                      // 确定事件
+                      onConfirm: (date) {
+                        print('confirm $date');
+                        setState(() {
+                          endTime='$date';
+                        });
+                      },
+                      // 当前时间
+                      currentTime: DateTime.now(),
+                      // 语言
+                      locale: LocaleType.zh);
+                },
+              ),
               Container(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: HomeNewItem("派单人", ""),
@@ -42,6 +130,7 @@ class _SendOrdersState extends State<SendOrdersPage> {
                       autofocus: false,
                       decoration: InputDecoration(
                         hintText: "请输入",
+                        hintStyle: TextStyle(fontSize: 14.0),
                         hintMaxLines: 20,
                         border: InputBorder.none,
                       ),
@@ -63,8 +152,7 @@ class _SendOrdersState extends State<SendOrdersPage> {
                         color: Colors.blue,
                         shape: const RoundedRectangleBorder(
                             side: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5))),
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
                         onPressed: () {}),
                   )),
             ],
@@ -73,6 +161,14 @@ class _SendOrdersState extends State<SendOrdersPage> {
       ),
     );
   }
+
+
+  //选择日期的方法
+  _selectDateMethod(bool isStart) async {
+
+  }
+
+
 
   Widget HomeNewItem(String titleName, String value) {
     return Container(
