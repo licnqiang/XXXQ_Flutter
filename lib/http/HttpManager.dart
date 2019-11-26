@@ -7,6 +7,7 @@ import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
 import 'package:xxxq_flutter/http/ResultData.dart';
 import 'package:xxxq_flutter/http/interceptors/LogsInterceptors.dart';
 import 'package:xxxq_flutter/http/interceptors/ResponseInterceptors.dart';
+import 'package:xxxq_flutter/utils/SPUtil.dart';
 
 class HttpManager  {
   static HttpManager _instance = HttpManager._internal();
@@ -37,6 +38,7 @@ class HttpManager  {
   HttpManager _baseUrl(String baseUrl) {
     if (_dio != null) {
       _dio.options.baseUrl = baseUrl;
+      _dio.options.headers={"Token": SPUtil.getString(SPUtil.SP_TOKEN)};
     }
     return this;
   }
@@ -44,6 +46,7 @@ class HttpManager  {
   //一般请求，默认域名
   HttpManager _normal() {
     if (_dio != null) {
+      _dio.options.headers={"Token": SPUtil.getString(SPUtil.SP_TOKEN)};
       if (_dio.options.baseUrl != HttpRequestUrl.BASE_URL_OUTER) {
         _dio.options.baseUrl = HttpRequestUrl.BASE_URL_SELF;
       }

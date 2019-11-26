@@ -1,4 +1,5 @@
 
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
@@ -8,6 +9,8 @@ import 'package:xxxq_flutter/http/HttpManager.dart';
 import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
 import 'package:xxxq_flutter/http/ResultData.dart';
 import 'package:xxxq_flutter/main.dart';
+import 'package:xxxq_flutter/model/UserModel.dart';
+import 'package:xxxq_flutter/utils/SPUtil.dart';
 import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
 
 /**
@@ -19,17 +22,24 @@ class LoginPage extends StatefulWidget{
     return new LoginPageState();
   }
 
+
 }
 
 class LoginPageState extends State<LoginPage>{
+  @override
+  void initState() {
+    super.initState();
+    _initSp();
+  }
+
 
   //手机号的控制器
-  TextEditingController nameController = TextEditingController();
+  TextEditingController nameController = TextEditingController.fromValue(TextEditingValue(text: SPUtil.getString(SPUtil.SP_USER_ACCOUNT)));
 
 
 
   //密码的控制器
-  TextEditingController pwdController = TextEditingController();
+  TextEditingController pwdController = TextEditingController(text: SPUtil.getString(SPUtil.SP_USER_PWD));
 
   bool _isObscure = true;
   Color _eyeColor;
@@ -156,8 +166,10 @@ class LoginPageState extends State<LoginPage>{
           maxWidth: 200
       ),
       child: new TextField(
+
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 4.0),
+
           hintText: '请输入用户名',
             hintStyle: TextStyle(color: Color.fromARGB(255, 91, 91, 91),fontSize: 14.0),
           prefixIcon: Icon(Icons.perm_identity),
@@ -210,7 +222,6 @@ class LoginPageState extends State<LoginPage>{
           );
         });
 
-//    Map<String,String>map ={"username":"zhanz","password":"111111"};
     FormData formData = new FormData.from({
 //      "username": nameController.text,
 //      "password": pwdController.text,
@@ -221,6 +232,15 @@ class LoginPageState extends State<LoginPage>{
     ResultData res  =await  HttpManager.getInstance().post(HttpRequestUrl.URL_Login, formData);
     if(res.isSuccess){
       Navigator.pop(context);//dismiss dialog
+      UserModel userModel = UserModel.fromJson(res.data);
+
+
+      SPUtil.putString(SPUtil.SP_TOKEN, userModel.data.token);
+      SPUtil.putString(SPUtil.SP_USER_NAME, userModel.data.user.name);
+      SPUtil.putString(SPUtil.SP_USER_ACCOUNT, userModel.data.user.account);
+      SPUtil.putString(SPUtil.SP_USER_PWD, pwdController.text);
+
+      print("保存token:"+  SPUtil.getString(SPUtil.SP_TOKEN));
       Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyApp()));
 
     }else{
@@ -229,6 +249,11 @@ class LoginPageState extends State<LoginPage>{
     }
 
   }
+
+  void _initSp() async{
+    await SPUtil.getInstance();
+  }
+
 
 
 }

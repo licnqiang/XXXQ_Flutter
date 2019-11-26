@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:xxxq_flutter/Splash.dart';
+import 'package:xxxq_flutter/utils/SPUtil.dart';
 import 'package:xxxq_flutter/utils/ThemeUtils.dart';
 import './pages/CheckingPage.dart';
 import './pages/WorkStationPage.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+
+
+
   final appBarTitles = ['首页', '考勤', '工作', '我的'];
   final tabTextStyleSelected = TextStyle(color: Colors.blue, fontSize: 14.0);
   final tabTextStyleNormal = TextStyle(color: Colors.grey, fontSize: 14.0);
@@ -44,6 +48,8 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
+
     pages = <Widget>[
       NewListPage(),
       CheckingPage(),
@@ -123,4 +129,6 @@ class MyAppState extends State<MyApp> {
           )),
     );
   }
+
+
 }

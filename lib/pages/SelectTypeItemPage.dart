@@ -8,8 +8,8 @@ import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
 import 'package:xxxq_flutter/http/ResultData.dart';
 import 'package:xxxq_flutter/widgets/TitleBar.dart';
 
-import '../CarNumModel.dart';
-import '../CompressMode.dart';
+import 'package:xxxq_flutter/model/CarNumModel.dart';
+import 'package:xxxq_flutter/model/CompressMode.dart';
 
 class SelectTypeItemPage extends StatefulWidget {
   final int type;
