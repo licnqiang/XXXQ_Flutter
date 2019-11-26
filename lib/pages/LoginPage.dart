@@ -224,10 +224,9 @@ class LoginPageState extends State<LoginPage>{
         });
 
     FormData formData = new FormData.from({
-//      "username": nameController.text,
-//      "password": pwdController.text,
-      "username": "zhanz",
-      "password": "111111",
+    "username": nameController.text,
+     "password": pwdController.text,
+
     });
 
     ResultData res  =await  HttpManager.getInstance().post(HttpRequestUrl.URL_Login, formData);
