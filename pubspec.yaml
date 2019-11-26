@@ -29,6 +29,7 @@ dependencies:
   dio: ^2.1.3
   event_bus: ^1.0.1
   fluttertoast: ^2.2.11
+  flutter_datetime_picker: 1.2.6
   #rxdart: ^0.18.1
   #rx_command: 2.0.5
 

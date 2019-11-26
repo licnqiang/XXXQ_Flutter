@@ -37,6 +37,8 @@ class LoginPageState extends State<LoginPage>{
   //手机号的控制器
   TextEditingController nameController = TextEditingController();
 
+
+
   //密码的控制器
   TextEditingController pwdController = TextEditingController();
 
@@ -222,8 +224,10 @@ class LoginPageState extends State<LoginPage>{
         });
 
     FormData formData = new FormData.from({
-      "username": nameController.text,
-      "password": pwdController.text,
+//      "username": nameController.text,
+//      "password": pwdController.text,
+      "username": "zhanz",
+      "password": "111111",
     });
 
     ResultData res  =await  HttpManager.getInstance().post(HttpRequestUrl.URL_Login, formData);
