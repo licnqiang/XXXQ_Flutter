@@ -8,4 +8,6 @@ class Constants {
 
  /// 创建EventBus
  static EventBus eventBus = EventBus();
+
+ static final String PAGE_SIZE="30";
 }

@@ -22,6 +22,10 @@ class HttpRequestUrl{
   //查询司机
   static const String URL_DRIVER="v1/findRoleUser";
 
+  //查询全部联系人
+  static const String URL_FIND_ALL_USER="v1/findAllUser";
+
+
   //派单
   static const String URL_SEND_ORDER="tyd/toTyd";
 
