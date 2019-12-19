@@ -29,4 +29,13 @@ class HttpRequestUrl{
   //派单
   static const String URL_SEND_ORDER="tyd/toTyd";
 
+  //站长获取运单列表
+  static const String URL_ORDER_LIST="tyd/searchTyd";
+
+  //站长取消运单
+  static const String URL_CANCEL_ORDER="tyd/cancelTyd";
+
+  //站长确认运单
+  static const String URL_AFFIRM_ORDER="tyd/finishTyd";
+
 }

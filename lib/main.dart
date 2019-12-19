@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:xxxq_flutter/Splash.dart';
+import 'package:xxxq_flutter/pages/WorkDeriverPage.dart';
 import 'package:xxxq_flutter/utils/SPUtil.dart';
 import 'package:xxxq_flutter/utils/ThemeUtils.dart';
 import './pages/CheckingPage.dart';
@@ -39,7 +40,7 @@ class MyAppState extends State<MyApp> {
 
   var tabImages;
   var _body;
-  var pages;
+  List<Widget> pages = new List();
 
   Image getTabImage(path) {
     return Image.asset(path, width: 20.0, height: 20.0);
@@ -48,14 +49,17 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    String userType=SPUtil.getString(SPUtil.SP_USER_TYPE);
 
+    pages.add(NewListPage());
+    pages.add(CheckingPage());
+    if("4"==userType){    //站长
+      pages.add(WorkStationPage());
+    }if("7"==userType){   //司机
+      pages.add(WorkDeriverPage());
+    }
+    pages.add(MyPage());
 
-    pages = <Widget>[
-      NewListPage(),
-      CheckingPage(),
-      WorkStationPage(),
-      MyPage()
-    ];
     if (tabImages == null) {
       tabImages = [
         [

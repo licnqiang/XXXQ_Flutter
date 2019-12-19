@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,13 +5,9 @@ import 'package:xxxq_flutter/constants/Constants.dart';
 import 'package:xxxq_flutter/http/HttpManager.dart';
 import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
 import 'package:xxxq_flutter/http/ResultData.dart';
-import 'package:xxxq_flutter/model/BurnModel.dart';
 import 'package:xxxq_flutter/model/BurnModelRow.dart';
-import 'package:xxxq_flutter/model/CarNumModel.dart';
 import 'package:xxxq_flutter/model/CarNumModelRow.dart';
-import 'package:xxxq_flutter/model/CompressMode.dart';
 import 'package:xxxq_flutter/model/CompressModelRow.dart';
-import 'package:xxxq_flutter/model/DriverModel.dart';
 import 'package:xxxq_flutter/model/DriverModelRow.dart';
 import 'package:xxxq_flutter/utils/EventBusUtil.dart';
 import 'package:xxxq_flutter/utils/SPUtil.dart';
@@ -263,23 +258,41 @@ class _SendOrdersState extends State<SendOrdersPage> {
           );
         });
 
-    FormData formData = new FormData.from({
-      "fscId": burnModelRow.idFsc,        //焚烧厂ID
-      "fscmc": burnModelRow.nameFsc,       //焚烧厂名称
-      "clId": carNumModelRow.vid,         //车辆VID
-      "jhddsjBiztyd": endTime,  //计划抵达时间
-      "jhqysjBiztyd": startTime, //计划起运时间
-      "pdsmBiztyd": "egqgqw",  //派单说明
-      "sjId": driverModelRow.id,         //司机ID
-      "yszId": compressModelRow.idYsz,        //压缩站ID
-      "yszName": compressModelRow.nameYsz,     //压缩站名称
-    });
+   var data={
+     "fscId": burnModelRow.idFsc,        //焚烧厂ID
+     "fscmc": burnModelRow.nameFsc,       //焚烧厂名称
+     "clId": carNumModelRow.vid,         //车辆VID
+     "jhddsjBiztyd": endTime,  //计划抵达时间
+     "jhqysjBiztyd": startTime, //计划起运时间
+     "pdsmBiztyd": "egqgqw",  //派单说明
+     "sjId": driverModelRow.id,         //司机ID
+     "yszId": compressModelRow.idYsz,        //压缩站ID
+     "yszName": compressModelRow.nameYsz,     //压缩站名称
+    };
+
+//    FormData formData = new FormData.from({
+//      "fscId": burnModelRow.idFsc,        //焚烧厂ID
+//      "fscmc": burnModelRow.nameFsc,       //焚烧厂名称
+//      "clId": carNumModelRow.vid,         //车辆VID
+//      "jhddsjBiztyd": endTime,  //计划抵达时间
+//      "jhqysjBiztyd": startTime, //计划起运时间
+//      "pdsmBiztyd": "egqgqw",  //派单说明
+//      "sjId": driverModelRow.id,         //司机ID
+//      "yszId": compressModelRow.idYsz,        //压缩站ID
+//      "yszName": compressModelRow.nameYsz,     //压缩站名称
+//    });
     ResultData res = await HttpManager.getInstance()
-        .post(HttpRequestUrl.URL_SEND_ORDER, formData);
+        .post(HttpRequestUrl.URL_SEND_ORDER, data);
+
+    Navigator.of(context, rootNavigator: true).pop();
+
+
     if (res.isSuccess) {
+      Fluttertoast.showToast(msg:"派单成功");
+      Navigator.of(context).pop();
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
     }
-    Navigator.pop(context);
+
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:xxxq_flutter/widgets/TitleBar.dart';
-import 'OrderDetailPage.dart';
+import 'DeriverOrderDetailPage.dart';
+import 'HearderOrderDetailPage.dart';
 
 class MaintenaceListPage extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _State extends State<MaintenaceListPage> {
             child: itemShow(),
             onTap: () {
               Navigator.push(context, new MaterialPageRoute(
-                  builder: (context) => OrderDetailPage()));
+                  builder: (context) => DeriverOrderDetailPage()));
             },
           );
         },

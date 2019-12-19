@@ -240,6 +240,7 @@ class LoginPageState extends State<LoginPage>{
       SPUtil.putString(SPUtil.SP_USER_ACCOUNT, userModel.data.user.account);
       SPUtil.putString(SPUtil.SP_USER_PWD, pwdController.text);
       SPUtil.putString(SPUtil.SP_USER_IDSYSDEPT, userModel.data.user.idSysdept);
+      SPUtil.putString(SPUtil.SP_USER_TYPE, userModel.data.user.userType);
 
       print("保存token:"+  SPUtil.getString(SPUtil.SP_TOKEN));
       print("保存账号:"+  SPUtil.getString(SPUtil.SP_USER_ACCOUNT));

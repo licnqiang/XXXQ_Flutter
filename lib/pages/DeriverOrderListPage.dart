@@ -5,16 +5,18 @@ import 'package:xxxq_flutter/http/HttpManager.dart';
 import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
 import 'package:xxxq_flutter/http/ResultData.dart';
 import 'package:xxxq_flutter/model/OrderListModel.dart';
+import 'package:xxxq_flutter/utils/SPUtil.dart';
 import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
 import 'package:xxxq_flutter/widgets/TitleBar.dart';
+import 'DeriverOrderDetailPage.dart';
 import 'HearderOrderDetailPage.dart';
 
-class TransOrderListPage extends StatefulWidget {
+class DeriverOrderListPage extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
-class _State extends State<TransOrderListPage> {
+class _State extends State<DeriverOrderListPage> {
   OrderListModel orderList = null;
 
   @override
@@ -36,13 +38,13 @@ class _State extends State<TransOrderListPage> {
     var data = {
       "pageNum": "0", //焚烧厂ID
       "pageSize": "-1", //焚烧厂名称
+      "sjId": SPUtil.getString(SPUtil.SP_USER_ID), //司机id
     };
     ResultData res = await HttpManager.getInstance()
         .get(HttpRequestUrl.URL_ORDER_LIST, data);
 //    Navigator.of(context, rootNavigator: true).pop();
     if (res.isSuccess) {
       orderList = OrderListModel.fromJson(res.data);
-      print("请求成功：" + res.data.toString());
       setState(() {    //更新ui
 
       });
@@ -65,7 +67,7 @@ class _State extends State<TransOrderListPage> {
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (context) => HearderOrderDetailPage(),
+                      builder: (context) => DeriverOrderDetailPage(),
                       settings: RouteSettings(
                         arguments: orderList.rows[index],
                       )));

@@ -14,6 +14,7 @@ class SPUtil{
   static const String SP_USER_PWD ="user_pwd";
   static const String SP_USER_ACCOUNT ="user_account";
   static const String SP_USER_IDSYSDEPT ="user_idSysdept";
+  static const String SP_USER_TYPE ="user_type";
 
   static SPUtil _singleton;
   static SharedPreferences _prefs;

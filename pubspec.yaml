@@ -73,6 +73,9 @@ flutter:
       - images/icon_arraw_next.png
       - images/send.png
       - images/yundan.png
+      - images/order_state_1.png
+      - images/order_state_2.png
+      - images/order_state_3.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

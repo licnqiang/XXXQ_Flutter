@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'DeriverOrderListPage.dart';
 import 'MaintenaceListPage.dart';
 import 'SendOrdersPage.dart';
 import 'TransOrderListPage.dart';
 
-class WorkStationPage extends StatelessWidget {
+/**
+ * 司机工作界面
+ */
+class WorkDeriverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Container buildButtonColumn(String image, String lab) {
@@ -59,12 +63,12 @@ class WorkStationPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       GestureDetector(
-                        child: buildButtonColumn("images/send.png", "派单"),
+                        child: buildButtonColumn("images/zhixingdingdan.png", "执行订单"),
                         onTap: () {
                           Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => SendOrdersPage()));
+                                  builder: (context) => DeriverOrderListPage()));
                         },
                       ),
                       Opacity(
@@ -86,28 +90,20 @@ class WorkStationPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(left: 15.0, top: 10.0, bottom: 10.0),
-                  child: Text("审批",
-                      textAlign: TextAlign.left,
-                      style: new TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold)),
-                ),
-                Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildButtonColumn("images/zhixingdingdan.png", "垃圾运输"),
-                      buildButtonColumn("images/station_apply.png", "行政报销"),
-                      GestureDetector(
-                        child: buildButtonColumn("images/yundan.png", "运单"),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => TransOrderListPage()));
-                        },
+                      Opacity(
+                        opacity: 0.0,
+                        child: buildButtonColumn("",""),
+                      ),
+                      Opacity(
+                        opacity: 0.0,
+                        child: buildButtonColumn("",""),
+                      ),
+                      Opacity(
+                        opacity: 0.0,
+                        child: buildButtonColumn("",""),
                       ),
                     ],
                   ),
@@ -124,17 +120,14 @@ class WorkStationPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      GestureDetector(
-                        child: buildButtonColumn(
-                            "images/device_service.png", "设备维护"),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => MaintenaceListPage()));
-                        },
+                      Opacity(
+                        opacity: 0.0,
+                        child: buildButtonColumn("",""),
                       ),
-                      buildButtonColumn("images/car_fault.png", "车辆故障"),
+                      Opacity(
+                        opacity: 0.0,
+                        child: buildButtonColumn("",""),
+                      ),
                       Opacity(
                         opacity: 0.0,
                          child: buildButtonColumn("",""),
