@@ -38,4 +38,21 @@ class HttpRequestUrl{
   //站长确认运单
   static const String URL_AFFIRM_ORDER="tyd/finishTyd";
 
+  //司机接单
+  static const String URL_ACCEPT_ORDER="tyd/driverTyd";
+
+  //司机起运
+  static const String URL_START_ORDER="tyd/startTyd";
+
+  //司机确认到达
+  static const String URL_END_ORDER="tyd/saveBDTyd";
+
+  //文件上传
+  static const String URL_FILE_UPLOAD="v1/upload";
+
+
+
+  //文件上传
+  static const String URL_CHECK_SET="api/attendance/param/listBySiteId";
+
 }

@@ -23,6 +23,14 @@ class _State extends State<TransOrderListPage> {
     sendOrder();
   }
 
+  @override
+  void deactivate() {
+    var bool = ModalRoute.of(context).isCurrent;
+    if (bool) {   //界面可见
+      sendOrder();
+    }
+  }
+
   //派单
   Future sendOrder() async {
 //    showDialog(

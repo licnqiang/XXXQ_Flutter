@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xxxq_flutter/pages/LoginPage.dart';
 
-import 'main.dart';
+import 'package:xxxq_flutter/pages/main.dart';
 
 class SplashPage extends StatefulWidget{
 

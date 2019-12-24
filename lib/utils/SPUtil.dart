@@ -11,6 +11,7 @@ class SPUtil{
   static const String SP_TOKEN ="token";
   static const String SP_USER_ID ="user_id";
   static const String SP_USER_NAME ="user_name";
+  static const String SP_USER_ADDRESS ="user_address";
   static const String SP_USER_PWD ="user_pwd";
   static const String SP_USER_ACCOUNT ="user_account";
   static const String SP_USER_IDSYSDEPT ="user_idSysdept";

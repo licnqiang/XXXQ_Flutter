@@ -8,6 +8,8 @@ import 'package:xxxq_flutter/utils/EventBusUtil.dart';
 import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
 import 'package:xxxq_flutter/widgets/TitleBar.dart';
 
+import 'PhotpGalleryPage.dart';
+
 /**
  * 站长派单详情
  */
@@ -23,7 +25,8 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
     bool btnHidden = true; //控制按钮显示
     bool stateHidden = true; //控制运单进度显示
     var btnShowText = ""; //按钮显示文字
-    var stateImageRourse="./images/order_state_1.png"; //默认加载，防止图片地址为空报错，默认加载时 不现实该控件
+    var stateImageRourse =
+        "./images/order_state_1.png"; //默认加载，防止图片地址为空报错，默认加载时 不现实该控件
     final OrderListModelRow rowsBean =
         ModalRoute.of(context).settings.arguments;
 
@@ -32,38 +35,38 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
         case "0": //取消
           bangdanHidden = true;
           btnHidden = true;
-          stateHidden=true;
+          stateHidden = true;
           break;
         case "1": //未接单
           bangdanHidden = true;
           btnHidden = false;
-          stateHidden=true;
+          stateHidden = true;
           btnShowText = "取消订单";
           break;
         case "2": //已接单未起运
           bangdanHidden = true;
           btnHidden = false;
-          stateHidden=false;
-          stateImageRourse="./images/order_state_1.png";
+          stateHidden = false;
+          stateImageRourse = "./images/order_state_1.png";
           btnShowText = "取消订单";
           break;
         case "3": //已起运未过磅
           bangdanHidden = true;
           btnHidden = true;
-          stateHidden=false;
-          stateImageRourse="./images/order_state_2.png";
+          stateHidden = false;
+          stateImageRourse = "./images/order_state_2.png";
           break;
         case "4": //已过磅未确认
           bangdanHidden = false;
           btnHidden = false;
-          stateHidden=false;
+          stateHidden = false;
           btnShowText = "确认";
-          stateImageRourse="./images/order_state_3.png";
+          stateImageRourse = "./images/order_state_3.png";
           break;
         case "5": //已完成
           bangdanHidden = false;
           btnHidden = true;
-          stateHidden=true;
+          stateHidden = true;
           break;
       }
     }
@@ -83,7 +86,7 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
                     child: Padding(
                         padding: EdgeInsets.only(
                             left: 60.0, top: 20.0, bottom: 20.0, right: 60.0),
-                        child: Image.asset('./images/order_state_1.png'))),
+                        child: Image.asset(stateImageRourse))),
               ),
 
               HomeNewItem("压缩站", rowsBean.yszName),
@@ -105,15 +108,14 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
                           Text("备注:", style: TextStyle(color: Colors.black45)),
                           Padding(
                             padding: EdgeInsets.only(
-                                left: 20.0,
-                                top: 10.0,
-                                bottom: 10.0,
-                                right: 20.0),
+                              top: 10.0,
+                              bottom: 10.0,
+                            ),
                             child: Text(
                                 null == rowsBean.pdsmBiztyd
                                     ? ""
                                     : rowsBean.pdsmBiztyd,
-                                style: TextStyle(color: Colors.black45)),
+                                style: TextStyle(color: Colors.black)),
                           )
                         ],
                       ),
@@ -163,14 +165,17 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(5))),
                           onPressed: () {
-                            if(btnShowText=="取消订单"){
+                            if (btnShowText == "取消订单") {
                               sendOrder(rowsBean.idBiztydsjgbd);
-                            }else if(btnShowText=="确认"){
+                            } else if (btnShowText == "确认") {
                               affirmOrder(rowsBean.idBiztydsjgbd);
                             }
-
                           }),
                     )),
+              ),
+
+              SizedBox(
+                height: 20.0,
               ),
             ],
           ),
@@ -194,11 +199,29 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
                   Padding(
                     padding: EdgeInsets.only(
                         left: 20.0, top: 20.0, bottom: 10.0, right: 20.0),
-                    child: Image.network(
-                      HttpRequestUrl.BASE_URL_OUTER + rowsBean.bdtp,
-                      height: 50.0,
-                      width: 50.0,
-                      fit: BoxFit.fill,
+                    child: GestureDetector(
+                      child: Image.network(
+                        HttpRequestUrl.BASE_URL_OUTER +
+                            (null == rowsBean.bdtp ? "" : rowsBean.bdtp),
+                        height: 50.0,
+                        width: 50.0,
+                        fit: BoxFit.fill,
+                      ),
+                      onTap: () {
+                        List photoList = [
+                          {
+                            'image':
+                            HttpRequestUrl.BASE_URL_OUTER + rowsBean.bdtp,
+                            'id': '1'
+                          },
+                        ];
+                        Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                              builder: (context) => PhotpGalleryPage(
+                                  photoList: photoList, index: 0),
+                            ));
+                      },
                     ),
                   )
                 ],
@@ -233,7 +256,6 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
         ));
   }
 
-
   //取消订单
   Future sendOrder(String tydsjgbdId) async {
     showDialog(
@@ -245,8 +267,8 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
           );
         });
 
-    var data={
-      "tydsjgbdId": tydsjgbdId,        //ID
+    var data = {
+      "tydsjgbdId": tydsjgbdId, //ID
     };
 
     ResultData res = await HttpManager.getInstance()
@@ -255,14 +277,12 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
     Navigator.of(context, rootNavigator: true).pop();
 
     if (res.isSuccess) {
-      Fluttertoast.showToast(msg:"订单取消成功");
+      Fluttertoast.showToast(msg: "订单取消成功");
       Navigator.of(context).pop();
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
     }
-
   }
-
 
   //确认订单
   Future affirmOrder(String tydsjgbdId) async {
@@ -276,23 +296,32 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
         });
     DateTime now = new DateTime.now();
 
-    var data={
-      "idBiztydsjgbd": tydsjgbdId,        //ID
-      "qrsjBiztydsjgbd": now.year.toString()+"-"+now.month.toString()+"-"+now.day.toString()+" "+now.hour.toString()+":"+now.minute.toString()+":"+now.second.toString(),        //过磅时间（年-月-日 时:分:秒）
+    var data = {
+      "idBiztydsjgbd": tydsjgbdId,
+      //ID
+      "qrsjBiztydsjgbd": now.year.toString() +
+          "-" +
+          now.month.toString() +
+          "-" +
+          now.day.toString() +
+          " " +
+          now.hour.toString() +
+          ":" +
+          now.minute.toString() +
+          ":" +
+          now.second.toString(),
+      //过磅时间（年-月-日 时:分:秒）
     };
 
     ResultData res = await HttpManager.getInstance()
-        .get(HttpRequestUrl.URL_AFFIRM_ORDER, data);
+        .post(HttpRequestUrl.URL_AFFIRM_ORDER, data);
 
     Navigator.of(context, rootNavigator: true).pop();
 
     if (res.isSuccess) {
-      Fluttertoast.showToast(msg:"订单取消成功");
       Navigator.of(context).pop();
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
     }
-
   }
-
 }

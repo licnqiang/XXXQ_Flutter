@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:xxxq_flutter/http/HttpManager.dart';
+import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
+import 'package:xxxq_flutter/http/ResultData.dart';
+import 'package:xxxq_flutter/utils/SPUtil.dart';
+import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
 
 class CheckingPage extends StatefulWidget {
+
   @override
   _CheckingPageState createState() => _CheckingPageState();
 }
 
 class _CheckingPageState extends State<CheckingPage> {
+  @override
+  void initState() {
+    super.initState();
+    requestWorkTimeSet();
+  }
+
+  @override
+  void deactivate() {
+    var bool = ModalRoute.of(context).isCurrent;
+    if (bool) {   //界面可见
+
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +38,119 @@ class _CheckingPageState extends State<CheckingPage> {
             padding: EdgeInsets.all(10),
           ),
           //考勤模块title布局
-          _checkingNav,
+          _checkingNav(),
           _checkingTimeShow,
           _checkingBtn,
         ],
       ),
     );
   }
+
+  //获取考勤时间限制 ------------------------------------------------------------------------------暂未接通--------------------------------------------
+  Future requestWorkTimeSet() async {
+      var data = {
+        "siteId": SPUtil.getString(SPUtil.SP_USER_IDSYSDEPT), //ID
+      };
+
+      ResultData res = await HttpManager.getInstance()
+          .post(HttpRequestUrl.URL_ACCEPT_ORDER, data);
+
+      if (res.isSuccess) {
+        Fluttertoast.showToast(msg: "获取成功");
+      } else {
+        Fluttertoast.showToast(msg: res.data.toString());
+      }
+    }
+}
+
+Widget _checkingNav() {
+  DateTime now = new DateTime.now();
+  var _userName=SPUtil.getString(SPUtil.SP_USER_NAME);
+  var userAddress=SPUtil.getString(SPUtil.SP_USER_ADDRESS);
+  var year=now.year.toString();
+  var month_day=now.month.toString()+"/"+now.day.toString();
+
+  return Container(
+    decoration: new BoxDecoration(
+      color: Colors.grey,
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    height: 80,
+    margin: EdgeInsets.all(40.0),
+    child: Row(
+      children: <Widget>[
+        Container(
+            decoration: new BoxDecoration(
+              color: Colors.black54,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                bottomLeft: Radius.circular(10.0),
+              ),
+            ),
+            height: 80,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Center(
+              child: Text(
+                "A",
+                style: new TextStyle(
+                  fontSize: 50,
+                  color: Colors.white,
+                ),
+              ),
+            )),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.only(left: 15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  _userName,                //名字
+                  style: new TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  userAddress,               //地址
+                  style: new TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(right: 15.0, top: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                year,                          //年份
+                textAlign: TextAlign.start,
+                style: new TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                month_day,                      //日期
+                textAlign: TextAlign.start,
+                style: new TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 /**
@@ -130,87 +258,5 @@ var _checkingTimeShow = Container(
   ),
 );
 
-/**
- * 考勤模块title布局
- */
-var _checkingNav = Container(
-  decoration: new BoxDecoration(
-    color: Colors.grey,
-    borderRadius: BorderRadius.circular(10.0),
-  ),
-  height: 80,
-  margin: EdgeInsets.all(40.0),
-  child: Row(
-    children: <Widget>[
-      Container(
-          decoration: new BoxDecoration(
-            color: Colors.black54,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10.0),
-              bottomLeft: Radius.circular(10.0),
-            ),
-          ),
-          height: 80,
-          padding: EdgeInsets.only(left: 15.0, right: 15.0),
-          child: Center(
-            child: Text(
-              "A",
-              style: new TextStyle(
-                fontSize: 50,
-                color: Colors.white,
-              ),
-            ),
-          )),
-      Expanded(
-        child: Container(
-          padding: EdgeInsets.only(left: 15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "A司机",
-                style: new TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                "航天中路",
-                style: new TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      Container(
-        padding: EdgeInsets.only(right: 15.0, top: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "2019",
-              textAlign: TextAlign.start,
-              style: new TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-              ),
-            ),
-            Text(
-              "11/21",
-              textAlign: TextAlign.start,
-              style: new TextStyle(
-                fontSize: 30,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ],
-  ),
-);
+
+

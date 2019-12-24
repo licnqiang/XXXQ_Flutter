@@ -3,14 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:xxxq_flutter/Splash.dart';
+import 'package:xxxq_flutter/pages/Splash.dart';
 import 'package:xxxq_flutter/pages/WorkDeriverPage.dart';
 import 'package:xxxq_flutter/utils/SPUtil.dart';
 import 'package:xxxq_flutter/utils/ThemeUtils.dart';
-import './pages/CheckingPage.dart';
-import './pages/WorkStationPage.dart';
-import './pages/NewListPage.dart';
-import './pages/MyPage.dart';
+
+import 'CheckingPage.dart';
+import 'MyPage.dart';
+import 'NewListPage.dart';
+import 'WorkStationPage.dart';
 
 void main() {
   runApp(new MaterialApp(home: new SplashPage()));
@@ -91,11 +92,17 @@ class MyAppState extends State<MyApp> {
   }
 
   //获取需要显示的图标
-  Image getTabIcon(int curIndex) {
+  Widget getTabIcon(int curIndex) {
     if (curIndex == _tabIndex) {
-      return tabImages[curIndex][1];
+      return Padding(
+        padding: EdgeInsets.only(top: 7.0),
+        child: tabImages[curIndex][1],
+      );
     }
-    return tabImages[curIndex][0];
+    return Padding(
+      padding: EdgeInsets.only(top: 7.0),
+      child: tabImages[curIndex][0],
+    );
   }
 
   Text getTabTitle(int curIndex) {

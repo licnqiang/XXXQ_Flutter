@@ -19,11 +19,21 @@ class DeriverOrderListPage extends StatefulWidget {
 class _State extends State<DeriverOrderListPage> {
   OrderListModel orderList = null;
 
+
   @override
   void initState() {
     super.initState();
     sendOrder();
   }
+
+  @override
+  void deactivate() {
+    var bool = ModalRoute.of(context).isCurrent;
+    if (bool) {   //界面可见
+      sendOrder();
+    }
+  }
+
 
   //派单
   Future sendOrder() async {

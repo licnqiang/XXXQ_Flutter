@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xxxq_flutter/http/HttpManager.dart';
 import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
 import 'package:xxxq_flutter/http/ResultData.dart';
-import 'package:xxxq_flutter/main.dart';
+import 'package:xxxq_flutter/pages/main.dart';
 import 'package:xxxq_flutter/model/UserModel.dart';
 import 'package:xxxq_flutter/utils/SPUtil.dart';
 import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
@@ -237,6 +237,7 @@ class LoginPageState extends State<LoginPage>{
 
       SPUtil.putString(SPUtil.SP_TOKEN, userModel.data.token);
       SPUtil.putString(SPUtil.SP_USER_NAME, userModel.data.user.name);
+      SPUtil.putString(SPUtil.SP_USER_ADDRESS, userModel.data.user.address);
       SPUtil.putString(SPUtil.SP_USER_ACCOUNT, userModel.data.user.account);
       SPUtil.putString(SPUtil.SP_USER_PWD, pwdController.text);
       SPUtil.putString(SPUtil.SP_USER_IDSYSDEPT, userModel.data.user.idSysdept);
