@@ -30,9 +30,9 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
   var title = null;
   int itemCount = 0;
   CompressMode compressMode = null;
-  CarNumModel carNumModel=null;
-  DriverModel driverModel=null;
-  BurnModel burnModel=null;
+  CarNumModel carNumModel = null;
+  DriverModel driverModel = null;
+  BurnModel burnModel = null;
 
   _SelectTypeItemPageState({Key key, this.type});
 
@@ -79,28 +79,27 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
 
   Widget showItemType() {
     if (type == Constants.compress_station_type) {
-      if(null==compressMode){
+      if (null == compressMode) {
         return Container();
-      }else{
+      } else {
         return itemCompressShow();
       }
-
     } else if (type == Constants.car_num_type) {
-      if(null==carNumModel){
+      if (null == carNumModel) {
         return Container();
-      }else{
+      } else {
         return itemCarNumShow();
       }
     } else if (type == Constants.driver_type) {
-      if(null==driverModel){
+      if (null == driverModel) {
         return Container();
-      }else{
+      } else {
         return itemDriverShow();
       }
     } else if (type == Constants.burn_station_type) {
-      if(null==burnModel){
+      if (null == burnModel) {
         return Container();
-      }else{
+      } else {
         return itemBurnShow();
       }
     }
@@ -117,7 +116,8 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
             margin: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: new AssetImage('images/background.png'), fit: BoxFit.fill),
+                  image: new AssetImage('images/background.png'),
+                  fit: BoxFit.fill),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +157,8 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
             margin: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: new AssetImage('images/background.png'), fit: BoxFit.fill),
+                  image: new AssetImage('images/background.png'),
+                  fit: BoxFit.fill),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,7 +198,8 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
             margin: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: new AssetImage('images/background.png'), fit: BoxFit.fill),
+                  image: new AssetImage('images/background.png'),
+                  fit: BoxFit.fill),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +237,6 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
         );
       },
     );
-
   }
 
   //焚烧厂列表
@@ -249,7 +250,8 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
             margin: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: new AssetImage('images/background.png'), fit: BoxFit.fill),
+                  image: new AssetImage('images/background.png'),
+                  fit: BoxFit.fill),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -280,10 +282,10 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
     ResultData res = await HttpManager.getInstance()
         .get(HttpRequestUrl.URL_ALL_COMPRESS, formData);
     if (res.isSuccess) {
-      CompressMode compress=CompressMode.fromJson(res.data);
+      CompressMode compress = CompressMode.fromJson(res.data);
       setState(() {
-        compressMode=compress;
-        itemCount=compress.rows.length*2;
+        compressMode = compress;
+        itemCount = compress.rows.length * 2;
       });
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
@@ -301,8 +303,8 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
         .get(HttpRequestUrl.URL_CAR_NUM, formData);
     if (res.isSuccess) {
       setState(() {
-        carNumModel=CarNumModel.fromJson(res.data);
-        itemCount=carNumModel.rows.length*2;
+        carNumModel = CarNumModel.fromJson(res.data);
+        itemCount = carNumModel.rows.length * 2;
       });
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
@@ -319,13 +321,14 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
         .get(HttpRequestUrl.URL_BURN_STATION, formData);
     if (res.isSuccess) {
       setState(() {
-        burnModel= BurnModel.fromJson(res.data);
-        itemCount=burnModel.rows.length*2;
+        burnModel = BurnModel.fromJson(res.data);
+        itemCount = burnModel.rows.length * 2;
       });
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
     }
   }
+
   //获取驾驶员数据
   Future getDrivers() async {
     FormData formData = new FormData.from({
@@ -338,15 +341,15 @@ class _SelectTypeItemPageState extends State<SelectTypeItemPage> {
         .get(HttpRequestUrl.URL_DRIVER, formData);
     if (res.isSuccess) {
       setState(() {
-        driverModel= DriverModel.fromJson(res.data);
-        itemCount=driverModel.rows.length*2;
+        driverModel = DriverModel.fromJson(res.data);
+        itemCount = driverModel.rows.length * 2;
       });
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
     }
   }
 
-  void _initSp() async{
+  void _initSp() async {
     await SPUtil.getInstance();
   }
 }

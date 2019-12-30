@@ -67,7 +67,7 @@ class WorkDeriverPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                               context,
-                              new MaterialPageRoute(
+                              new CupertinoPageRoute(
                                   builder: (context) => DeriverOrderListPage()));
                         },
                       ),

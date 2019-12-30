@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:xxxq_flutter/pages/LoginPage.dart';
 
 import 'package:xxxq_flutter/pages/main.dart';
+import 'package:xxxq_flutter/widgets/CustomPageRouteBuilder.dart';
 
 class SplashPage extends StatefulWidget{
 
@@ -24,10 +25,9 @@ class SplashState extends State<SplashPage>{
   @override
   void initState() {
     super.initState();
-    _timer = new Timer(const Duration(milliseconds: 1500), () {
+    _timer = new Timer(const Duration(milliseconds: 500), () {
       try {
-        Navigator.of(context).pushAndRemoveUntil(new MaterialPageRoute(
-            builder: (BuildContext context) =>  new LoginPage()), (
+        Navigator.of(context).pushAndRemoveUntil(new CustomPageRouteBuilder(new LoginPage()), (
             Route route) => route == null);
 
       } catch (e) {
@@ -43,21 +43,18 @@ class SplashState extends State<SplashPage>{
   void dispose() {
     _timer.cancel();
     super.dispose();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Material(
-      child: Container(
-        alignment: Alignment(0, -0.3),
-        child: new Text(
-          "西咸环卫",
-          style: new TextStyle(
-              color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold),
-             textDirection: TextDirection.ltr,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("images/xh.png"),
+          fit: BoxFit.cover,
         ),
       ),
+      child: Container()
     );
   }
 

@@ -67,7 +67,7 @@ class _OrderDetailPageState extends State<DeriverOrderDetailPage> {
           stateHidden = false;
           stateImageRourse = "./images/order_state_2.png";
           btnShowText = "确认到达";
-          _commentFocus=true;     // 获取焦点
+          _commentFocus = true; // 获取焦点
           break;
 
         case "4": //已过磅未确认
@@ -75,40 +75,44 @@ class _OrderDetailPageState extends State<DeriverOrderDetailPage> {
           btnHidden = true;
           stateHidden = false;
           stateImageRourse = "./images/order_state_3.png";
-          _commentFocus=false;
+          _commentFocus = false;
           break;
         case "5": //已完成
           bangdanHidden = false;
           btnHidden = true;
           stateHidden = true;
-          _commentFocus=false;
+          _commentFocus = false;
           break;
       }
     }
 
-    /**
-     * 可编辑
-     */
-    Widget HomeNewEditeItem(String titleName, String value) {
-      return Container(
-          color: Colors.white,
-          margin: EdgeInsets.only(top: 1.0),
-          padding: EdgeInsets.only(left: 10.0, right: 10.0),
-          height: 45.0,
-          child: Row(
-            children: <Widget>[
-              Text(titleName + ":", style: TextStyle(color: Colors.black45)),
-              Expanded(
-                  child: TextField(
-                 enabled:  _commentFocus,
-                textAlign: TextAlign.right,
-                decoration:
-                    InputDecoration(hintText: "请输入", border: InputBorder.none),
-              )),
-            ],
-          ));
-    }
+    return pageShow();
+  }
 
+  /**
+   * 可编辑
+   */
+  Widget HomeNewEditeItem(String titleName, String value) {
+    return Container(
+        color: Colors.white,
+        margin: EdgeInsets.only(top: 1.0),
+        padding: EdgeInsets.only(left: 10.0, right: 10.0),
+        height: 45.0,
+        child: Row(
+          children: <Widget>[
+            Text(titleName + ":", style: TextStyle(color: Colors.black45)),
+            Expanded(
+                child: TextField(
+              enabled: _commentFocus,
+              textAlign: TextAlign.right,
+              decoration:
+                  InputDecoration(hintText: "请输入", border: InputBorder.none),
+            )),
+          ],
+        ));
+  }
+
+  Widget pageShow() {
     return Scaffold(
         appBar: TitleBar().backAppbar(context, "订单详情"),
         body: SingleChildScrollView(

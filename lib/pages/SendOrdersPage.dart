@@ -79,18 +79,21 @@ class _SendOrdersState extends State<SendOrdersPage> {
                 onTap: () {
                   Navigator.push(
                       context,
-                      new MaterialPageRoute(
+                      new CupertinoPageRoute(
                           builder: (context) => SelectTypeItemPage(
                               type: Constants.compress_station_type)));
                 },
               ),
               GestureDetector(
-                child: HomeNewItem("车牌",
-                    null == carNumModelRow ? "" : carNumModelRow.licensePlate),
+                child: HomeNewItem(
+                    "车牌",
+                    null == carNumModelRow
+                        ? ""
+                        : carNumModelRow.licensePlate),
                 onTap: () {
                   Navigator.push(
                       context,
-                      new MaterialPageRoute(
+                      new CupertinoPageRoute(
                           builder: (context) => SelectTypeItemPage(
                               type: Constants.car_num_type)));
                 },
@@ -101,9 +104,9 @@ class _SendOrdersState extends State<SendOrdersPage> {
                 onTap: () {
                   Navigator.push(
                       context,
-                      new MaterialPageRoute(
-                          builder: (context) =>
-                              SelectTypeItemPage(type: Constants.driver_type)));
+                      new CupertinoPageRoute(
+                          builder: (context) => SelectTypeItemPage(
+                              type: Constants.driver_type)));
                 },
               ),
               GestureDetector(
@@ -114,16 +117,17 @@ class _SendOrdersState extends State<SendOrdersPage> {
                       showTitleActions: true,
                       // change事件
                       onChanged: (date) {
-                    print('change $date');
-                  },
+                        print('change $date');
+                      },
                       // 确定事件
                       onConfirm: (date) {
-                    print('confirm $date');
-                    setState(() {
-                      startTime = '$date';
-                      startTime = startTime.substring(0, startTime.length - 4);
-                    });
-                  },
+                        print('confirm $date');
+                        setState(() {
+                          startTime = '$date';
+                          startTime =
+                              startTime.substring(0, startTime.length - 4);
+                        });
+                      },
                       // 当前时间
                       currentTime: DateTime.now(),
                       // 语言
@@ -136,7 +140,7 @@ class _SendOrdersState extends State<SendOrdersPage> {
                 onTap: () {
                   Navigator.push(
                       context,
-                      new MaterialPageRoute(
+                      new CupertinoPageRoute(
                           builder: (context) => SelectTypeItemPage(
                               type: Constants.burn_station_type)));
                 },
@@ -149,16 +153,16 @@ class _SendOrdersState extends State<SendOrdersPage> {
                       showTitleActions: true,
                       // change事件
                       onChanged: (date) {
-                    print('change $date');
-                  },
+                        print('change $date');
+                      },
                       // 确定事件
                       onConfirm: (date) {
-                    print('confirm $date');
-                    setState(() {
-                      endTime = '$date';
-                      endTime = endTime.substring(0, endTime.length - 4);
-                    });
-                  },
+                        print('confirm $date');
+                        setState(() {
+                          endTime = '$date';
+                          endTime = endTime.substring(0, endTime.length - 4);
+                        });
+                      },
                       // 当前时间
                       currentTime: DateTime.now(),
                       // 语言
@@ -168,7 +172,7 @@ class _SendOrdersState extends State<SendOrdersPage> {
               Container(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child:
-                    HomeNewItem("派单人", SPUtil.getString(SPUtil.SP_USER_NAME)),
+                HomeNewItem("派单人", SPUtil.getString(SPUtil.SP_USER_NAME)),
               ),
               Container(
                 padding: EdgeInsets.all(10.0),
@@ -202,12 +206,14 @@ class _SendOrdersState extends State<SendOrdersPage> {
                     child: RaisedButton(
                         child: Text(
                           '申请派单',
-                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 16.0),
                         ),
                         color: Colors.blue,
                         shape: const RoundedRectangleBorder(
                             side: BorderSide.none,
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(5))),
                         onPressed: () {
                           sendOrder();
                         }),
@@ -258,16 +264,16 @@ class _SendOrdersState extends State<SendOrdersPage> {
           );
         });
 
-   var data={
-     "fscId": burnModelRow.idFsc,        //焚烧厂ID
-     "fscmc": burnModelRow.nameFsc,       //焚烧厂名称
-     "clId": carNumModelRow.vid,         //车辆VID
-     "jhddsjBiztyd": endTime,  //计划抵达时间
-     "jhqysjBiztyd": startTime, //计划起运时间
-     "pdsmBiztyd": "egqgqw",  //派单说明
-     "sjId": driverModelRow.id,         //司机ID
-     "yszId": compressModelRow.idYsz,        //压缩站ID
-     "yszName": compressModelRow.nameYsz,     //压缩站名称
+    var data = {
+      "fscId": burnModelRow.idFsc, //焚烧厂ID
+      "fscmc": burnModelRow.nameFsc, //焚烧厂名称
+      "clId": carNumModelRow.vid, //车辆VID
+      "jhddsjBiztyd": endTime, //计划抵达时间
+      "jhqysjBiztyd": startTime, //计划起运时间
+      "pdsmBiztyd": "egqgqw", //派单说明
+      "sjId": driverModelRow.id, //司机ID
+      "yszId": compressModelRow.idYsz, //压缩站ID
+      "yszName": compressModelRow.nameYsz, //压缩站名称
     };
 
 //    FormData formData = new FormData.from({
@@ -286,13 +292,11 @@ class _SendOrdersState extends State<SendOrdersPage> {
 
     Navigator.of(context, rootNavigator: true).pop();
 
-
     if (res.isSuccess) {
-      Fluttertoast.showToast(msg:"派单成功");
+      Fluttertoast.showToast(msg: "派单成功");
       Navigator.of(context).pop();
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
     }
-
   }
 }

@@ -1,3 +1,4 @@
+//import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -5,10 +6,11 @@ import 'package:xxxq_flutter/http/HttpManager.dart';
 import 'package:xxxq_flutter/http/HttpRequestUrl.dart';
 import 'package:xxxq_flutter/http/ResultData.dart';
 import 'package:xxxq_flutter/utils/SPUtil.dart';
-import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
+//import 'package:xxxq_flutter/widgets/LoadingDialog.dart';
+
+//import 'FaceIdentyPage.dart';
 
 class CheckingPage extends StatefulWidget {
-
   @override
   _CheckingPageState createState() => _CheckingPageState();
 }
@@ -23,11 +25,11 @@ class _CheckingPageState extends State<CheckingPage> {
   @override
   void deactivate() {
     var bool = ModalRoute.of(context).isCurrent;
-    if (bool) {   //界面可见
+    if (bool) {
+      //界面可见
 
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,15 @@ class _CheckingPageState extends State<CheckingPage> {
           //考勤模块title布局
           _checkingNav(),
           _checkingTimeShow,
-          _checkingBtn,
+          GestureDetector(
+            child: _checkingBtn,
+            onTap: () {
+//              Navigator.push(
+//                  context,
+//                  new CupertinoPageRoute(
+//                      builder: (context) => new FaceIdentyPage()));
+            },
+          ),
         ],
       ),
     );
@@ -48,34 +58,34 @@ class _CheckingPageState extends State<CheckingPage> {
 
   //获取考勤时间限制 ------------------------------------------------------------------------------暂未接通--------------------------------------------
   Future requestWorkTimeSet() async {
-      var data = {
-        "siteId": SPUtil.getString(SPUtil.SP_USER_IDSYSDEPT), //ID
-      };
+    var data = {
+      "siteId": SPUtil.getString(SPUtil.SP_USER_IDSYSDEPT), //ID
+    };
 
-      ResultData res = await HttpManager.getInstance()
-          .post(HttpRequestUrl.URL_ACCEPT_ORDER, data);
+    ResultData res = await HttpManager.getInstance()
+        .post(HttpRequestUrl.URL_ACCEPT_ORDER, data);
 
-      if (res.isSuccess) {
-        Fluttertoast.showToast(msg: "获取成功");
-      } else {
-        Fluttertoast.showToast(msg: res.data.toString());
-      }
+    if (res.isSuccess) {
+      Fluttertoast.showToast(msg: "获取成功");
+    } else {
+      Fluttertoast.showToast(msg: res.data.toString());
     }
+  }
 }
 
 Widget _checkingNav() {
   DateTime now = new DateTime.now();
-  var _userName=SPUtil.getString(SPUtil.SP_USER_NAME);
-  var userAddress=SPUtil.getString(SPUtil.SP_USER_ADDRESS);
-  var year=now.year.toString();
-  var month_day=now.month.toString()+"/"+now.day.toString();
+  var _userName = SPUtil.getString(SPUtil.SP_USER_NAME);
+  var userAddress = SPUtil.getString(SPUtil.SP_USER_ADDRESS);
+  var year = now.year.toString();
+  var month_day = now.month.toString() + "/" + now.day.toString();
 
   return Container(
     decoration: new BoxDecoration(
       color: Colors.grey,
       borderRadius: BorderRadius.circular(10.0),
     ),
-    height: 80,
+    height: 90,
     margin: EdgeInsets.all(40.0),
     child: Row(
       children: <Widget>[
@@ -87,8 +97,8 @@ Widget _checkingNav() {
                 bottomLeft: Radius.circular(10.0),
               ),
             ),
-            height: 80,
-            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            height: 90,
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
             child: Center(
               child: Text(
                 "A",
@@ -106,14 +116,14 @@ Widget _checkingNav() {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  _userName,                //名字
+                  _userName, //名字
                   style: new TextStyle(
                     fontSize: 25,
                     color: Colors.white,
                   ),
                 ),
                 Text(
-                  userAddress,               //地址
+                  userAddress, //地址
                   style: new TextStyle(
                     fontSize: 14,
                     color: Colors.white,
@@ -130,7 +140,7 @@ Widget _checkingNav() {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                year,                          //年份
+                year, //年份
                 textAlign: TextAlign.start,
                 style: new TextStyle(
                   fontSize: 14,
@@ -138,7 +148,7 @@ Widget _checkingNav() {
                 ),
               ),
               Text(
-                month_day,                      //日期
+                month_day, //日期
                 textAlign: TextAlign.start,
                 style: new TextStyle(
                   fontSize: 30,
@@ -169,30 +179,28 @@ var _checkingBtn = Expanded(
             size: 150,
           ),
           Container(
-                child:Center(
-                  child:  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.tag_faces,
-                        color: Colors.white,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
-                        child: Text(
-                          "上班打卡",
-                          style: new TextStyle(color: Colors.white, fontSize: 20.0),
-                        ),
-                      ),
-
-                      Text(
-                        "16:09:54",
-                        style: new TextStyle(color: Colors.grey, fontSize: 12.0),
-                      ),
-                    ],
+              child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.tag_faces,
+                  color: Colors.white,
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  child: Text(
+                    "上班打卡",
+                    style: new TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
-                )
-              ),
+                ),
+                Text(
+                  "16:09:54",
+                  style: new TextStyle(color: Colors.grey, fontSize: 12.0),
+                ),
+              ],
+            ),
+          )),
         ],
       ),
     ),
@@ -257,6 +265,3 @@ var _checkingTimeShow = Container(
     ],
   ),
 );
-
-
-

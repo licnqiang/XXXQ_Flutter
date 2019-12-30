@@ -63,7 +63,7 @@ class WorkStationPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                               context,
-                              new MaterialPageRoute(
+                              new CupertinoPageRoute(
                                   builder: (context) => SendOrdersPage()));
                         },
                       ),
@@ -105,7 +105,7 @@ class WorkStationPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                               context,
-                              new MaterialPageRoute(
+                              new CupertinoPageRoute(
                                   builder: (context) => TransOrderListPage()));
                         },
                       ),
@@ -130,7 +130,7 @@ class WorkStationPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                               context,
-                              new MaterialPageRoute(
+                              new CupertinoPageRoute(
                                   builder: (context) => MaintenaceListPage()));
                         },
                       ),

@@ -6,7 +6,9 @@ import 'package:xxxq_flutter/widgets/TitleBar.dart';
 class PhotpGalleryPage extends StatefulWidget {
   final List photoList;
   final int index;
+
   PhotpGalleryPage({this.photoList, this.index});
+
   @override
   _PhotpGalleryPageState createState() => _PhotpGalleryPageState();
 }
@@ -17,6 +19,7 @@ class _PhotpGalleryPageState extends State<PhotpGalleryPage> {
   int initialIndex; //初始index
   int length;
   int title;
+
   @override
   void initState() {
     currentIndex = widget.index;
@@ -51,7 +54,8 @@ class _PhotpGalleryPageState extends State<PhotpGalleryPage> {
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
                   return PhotoViewGalleryPageOptions(
-                    imageProvider: NetworkImage(widget.photoList[index]['image']),
+                    imageProvider:
+                    NetworkImage(widget.photoList[index]['image']),
                     initialScale: PhotoViewComputedScale.contained * 1,
                     heroTag: widget.photoList[index]['id'],
                   );
@@ -61,7 +65,8 @@ class _PhotpGalleryPageState extends State<PhotpGalleryPage> {
                 backgroundDecoration: BoxDecoration(
                   color: Colors.black,
                 ),
-                pageController: PageController(initialPage: initialIndex), //点进去哪页默认就显示哪一页
+                pageController: PageController(initialPage: initialIndex),
+                //点进去哪页默认就显示哪一页
                 onPageChanged: onPageChanged,
               ),
 //              Container(

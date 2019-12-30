@@ -26,8 +26,9 @@ class _State extends State<TransOrderListPage> {
   @override
   void deactivate() {
     var bool = ModalRoute.of(context).isCurrent;
-    if (bool) {   //界面可见
-      sendOrder();
+    if (bool) {
+      //界面可见
+//      sendOrder();
     }
   }
 
@@ -51,8 +52,8 @@ class _State extends State<TransOrderListPage> {
     if (res.isSuccess) {
       orderList = OrderListModel.fromJson(res.data);
       print("请求成功：" + res.data.toString());
-      setState(() {    //更新ui
-
+      setState(() {
+        //更新ui
       });
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
@@ -72,7 +73,7 @@ class _State extends State<TransOrderListPage> {
             onTap: () {
               Navigator.push(
                   context,
-                  new MaterialPageRoute(
+                  new CupertinoPageRoute(
                       builder: (context) => HearderOrderDetailPage(),
                       settings: RouteSettings(
                         arguments: orderList.rows[index],

@@ -70,116 +70,122 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
           break;
       }
     }
-
-    return Scaffold(
-        appBar: TitleBar().backAppbar(context, "订单详情"),
-        body: SingleChildScrollView(
-            child: Container(
-          margin: EdgeInsets.only(top: 10.0),
-          child: Column(
-            children: <Widget>[
-              //显示运单进度
-              Offstage(
-                offstage: stateHidden,
-                child: Container(
-                    color: Colors.white,
-                    child: Padding(
-                        padding: EdgeInsets.only(
-                            left: 60.0, top: 20.0, bottom: 20.0, right: 60.0),
-                        child: Image.asset(stateImageRourse))),
-              ),
-
-              HomeNewItem("压缩站", rowsBean.yszName),
-              HomeNewItem("车牌", rowsBean.licensePlate),
-              HomeNewItem("运输人", rowsBean.name),
-              HomeNewItem("起运时间", rowsBean.jhqysjBiztyd),
-              HomeNewItem("焚烧厂", rowsBean.fscmc),
-              HomeNewItem("抵达时间", rowsBean.jhddsjBiztyd),
-              HomeNewItem("运单号", rowsBean.ydhBiztyd),
-              Container(
-                  margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  color: Colors.white,
-                  padding: EdgeInsets.only(top: 10.0, left: 10.0, bottom: 10.0),
-                  child: Row(
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("备注:", style: TextStyle(color: Colors.black45)),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 10.0,
-                              bottom: 10.0,
-                            ),
-                            child: Text(
-                                null == rowsBean.pdsmBiztyd
-                                    ? ""
-                                    : rowsBean.pdsmBiztyd,
-                                style: TextStyle(color: Colors.black)),
-                          )
-                        ],
-                      ),
-                    ],
-                  )),
-              //榜单信息详情
-              Offstage(
-                offstage: bangdanHidden,
-                child: Column(
-                  children: <Widget>[
-                    HomeNewItem(
-                        "毛重(吨)",
-                        null == rowsBean.mzBizgbd
-                            ? ""
-                            : rowsBean.mzBizgbd.toString()),
-                    HomeNewItem(
-                        "皮重(吨)",
-                        null == rowsBean.pzBizgbd
-                            ? ""
-                            : rowsBean.pzBizgbd.toString()),
-                    HomeNewItem(
-                        "净重(吨)",
-                        null == rowsBean.jzBizgbd
-                            ? ""
-                            : rowsBean.jzBizgbd.toString()),
-                    showImage(rowsBean),
-                  ],
+    //整个界面布局
+    Widget pageShow() {
+      return Scaffold(
+          appBar: TitleBar().backAppbar(context, "订单详情"),
+          body: SingleChildScrollView(
+              child: Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: Column(
+              children: <Widget>[
+                //显示运单进度
+                Offstage(
+                  offstage: stateHidden,
+                  child: Container(
+                      color: Colors.white,
+                      child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 60.0, top: 20.0, bottom: 20.0, right: 60.0),
+                          child: Image.asset(stateImageRourse))),
                 ),
-              ),
-              //取消订单按钮
-              Offstage(
-                offstage: btnHidden,
-                child: Container(
-                    margin: EdgeInsets.only(top: 20.0),
-                    child: SizedBox(
-                      height: 40.0,
-                      width: 270.0,
-                      child: RaisedButton(
-                          child: Text(
-                            btnShowText,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16.0),
-                          ),
-                          color: Colors.blue,
-                          shape: const RoundedRectangleBorder(
-                              side: BorderSide.none,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
-                          onPressed: () {
-                            if (btnShowText == "取消订单") {
-                              sendOrder(rowsBean.idBiztydsjgbd);
-                            } else if (btnShowText == "确认") {
-                              affirmOrder(rowsBean.idBiztydsjgbd);
-                            }
-                          }),
-                    )),
-              ),
 
-              SizedBox(
-                height: 20.0,
-              ),
-            ],
-          ),
-        )));
+                HomeNewItem("压缩站", rowsBean.yszName),
+                HomeNewItem("车牌", rowsBean.licensePlate),
+                HomeNewItem("运输人", rowsBean.name),
+                HomeNewItem("起运时间", rowsBean.jhqysjBiztyd),
+                HomeNewItem("焚烧厂", rowsBean.fscmc),
+                HomeNewItem("抵达时间", rowsBean.jhddsjBiztyd),
+                HomeNewItem("运单号", rowsBean.ydhBiztyd),
+                Container(
+                    margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                    color: Colors.white,
+                    padding:
+                        EdgeInsets.only(top: 10.0, left: 10.0, bottom: 10.0),
+                    child: Row(
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("备注:",
+                                style: TextStyle(color: Colors.black45)),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: 10.0,
+                                bottom: 10.0,
+                              ),
+                              child: Text(
+                                  null == rowsBean.pdsmBiztyd
+                                      ? ""
+                                      : rowsBean.pdsmBiztyd,
+                                  style: TextStyle(color: Colors.black)),
+                            )
+                          ],
+                        ),
+                      ],
+                    )),
+                //榜单信息详情
+                Offstage(
+                  offstage: bangdanHidden,
+                  child: Column(
+                    children: <Widget>[
+                      HomeNewItem(
+                          "毛重(吨)",
+                          null == rowsBean.mzBizgbd
+                              ? ""
+                              : rowsBean.mzBizgbd.toString()),
+                      HomeNewItem(
+                          "皮重(吨)",
+                          null == rowsBean.pzBizgbd
+                              ? ""
+                              : rowsBean.pzBizgbd.toString()),
+                      HomeNewItem(
+                          "净重(吨)",
+                          null == rowsBean.jzBizgbd
+                              ? ""
+                              : rowsBean.jzBizgbd.toString()),
+                      showImage(rowsBean),
+                    ],
+                  ),
+                ),
+                //取消订单按钮
+                Offstage(
+                  offstage: btnHidden,
+                  child: Container(
+                      margin: EdgeInsets.only(top: 20.0),
+                      child: SizedBox(
+                        height: 40.0,
+                        width: 270.0,
+                        child: RaisedButton(
+                            child: Text(
+                              btnShowText,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 16.0),
+                            ),
+                            color: Colors.blue,
+                            shape: const RoundedRectangleBorder(
+                                side: BorderSide.none,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                            onPressed: () {
+                              if (btnShowText == "取消订单") {
+                                sendOrder(rowsBean.idBiztydsjgbd);
+                              } else if (btnShowText == "确认") {
+                                affirmOrder(rowsBean.idBiztydsjgbd);
+                              }
+                            }),
+                      )),
+                ),
+
+                SizedBox(
+                  height: 20.0,
+                ),
+              ],
+            ),
+          )));
+    }
+
+    return pageShow();
   }
 
   Widget showImage(OrderListModelRow rowsBean) {
@@ -211,7 +217,7 @@ class _OrderDetailPageState extends State<HearderOrderDetailPage> {
                         List photoList = [
                           {
                             'image':
-                            HttpRequestUrl.BASE_URL_OUTER + rowsBean.bdtp,
+                                HttpRequestUrl.BASE_URL_OUTER + rowsBean.bdtp,
                             'id': '1'
                           },
                         ];

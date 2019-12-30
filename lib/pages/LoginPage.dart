@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xxxq_flutter/http/HttpManager.dart';
@@ -245,7 +246,8 @@ class LoginPageState extends State<LoginPage>{
 
       print("保存token:"+  SPUtil.getString(SPUtil.SP_TOKEN));
       print("保存账号:"+  SPUtil.getString(SPUtil.SP_USER_ACCOUNT));
-      Navigator.push(context, new MaterialPageRoute(builder: (context)=>new MyApp()));
+      Navigator.push(context, new CupertinoPageRoute(
+          builder: (context)=>new MyApp()));
 
     }else{
       Fluttertoast.showToast(msg: res.data.toString());

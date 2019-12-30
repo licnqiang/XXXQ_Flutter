@@ -20,8 +20,10 @@ class _State extends State<MaintenaceListPage> {
           return GestureDetector(
             child: itemShow(),
             onTap: () {
-              Navigator.push(context, new MaterialPageRoute(
-                  builder: (context) => DeriverOrderDetailPage()));
+              Navigator.push(
+                  context,
+                  new CupertinoPageRoute(
+                      builder: (context) => DeriverOrderDetailPage()));
             },
           );
         },
@@ -37,31 +39,35 @@ class _State extends State<MaintenaceListPage> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(5.0),
       ),
-      child:Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             padding: EdgeInsets.all(10.0),
             decoration: new BoxDecoration(
               color: Colors.black45,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0),topRight: Radius.circular(5.0)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5.0),
+                  topRight: Radius.circular(5.0)),
             ),
             child: Row(
               children: <Widget>[
-                Text("维修",style: TextStyle(color: Colors.white))
+                Text("维修", style: TextStyle(color: Colors.white))
               ],
             ),
           ),
-
           Container(
             padding: EdgeInsets.all(10.0),
             child: Row(
               children: <Widget>[
-                Text("陕AU0797",style: TextStyle(color: Colors.black),),
+                Text(
+                  "陕AU0797",
+                  style: TextStyle(color: Colors.black),
+                ),
                 Expanded(
                   child: Container(
-                    alignment:Alignment.centerRight ,
-                    child: Text("未审核",style: TextStyle(color: Colors.black54)),
+                    alignment: Alignment.centerRight,
+                    child: Text("未审核", style: TextStyle(color: Colors.black54)),
                   ),
                 ),
               ],
@@ -79,13 +85,13 @@ class _State extends State<MaintenaceListPage> {
               alignment: Alignment.centerLeft,
               child: Row(
                 children: <Widget>[
-                  Text("2019-10-31 15:31:55",style: TextStyle(color: Colors.black45)),
+                  Text("2019-10-31 15:31:55",
+                      style: TextStyle(color: Colors.black45)),
                 ],
               ),
             ),
           )
         ],
-
       ),
     );
   }

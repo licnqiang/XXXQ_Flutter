@@ -56,20 +56,24 @@ class UserListState extends State<UserListPage>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-       appBar: TitleBar().backAppbar(context, "人员列表"),
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pop();
+      },
+      child: Scaffold(
+        appBar: TitleBar().backAppbar(context, "人员列表"),
 
-       body: EasyRefresh.custom(
-         onRefresh: () async {
-           _page=0;
-           getData();
-         },
-         onLoad: () async {
-           _page++;
-           getData();
+        body: EasyRefresh.custom(
+          onRefresh: () async {
+            _page=0;
+            getData();
+          },
+          onLoad: () async {
+            _page++;
+            getData();
 
-         },
-         slivers: <Widget>[
+          },
+          slivers: <Widget>[
 
             SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -80,17 +84,18 @@ class UserListState extends State<UserListPage>{
               ),
             ),
 
-       /*   ListView.builder(
+            /*   ListView.builder(
             itemBuilder: (context,index){
             return   getRow(context,index);
           },
             itemCount: dataList.length,
 
           )*/
-         ],
+          ],
 
-       ),
+        ),
 
+      ),
     );
   }
 

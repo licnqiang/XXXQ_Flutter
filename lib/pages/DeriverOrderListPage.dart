@@ -19,7 +19,6 @@ class DeriverOrderListPage extends StatefulWidget {
 class _State extends State<DeriverOrderListPage> {
   OrderListModel orderList = null;
 
-
   @override
   void initState() {
     super.initState();
@@ -29,11 +28,11 @@ class _State extends State<DeriverOrderListPage> {
   @override
   void deactivate() {
     var bool = ModalRoute.of(context).isCurrent;
-    if (bool) {   //界面可见
+    if (bool) {
+      //界面可见
       sendOrder();
     }
   }
-
 
   //派单
   Future sendOrder() async {
@@ -55,8 +54,8 @@ class _State extends State<DeriverOrderListPage> {
 //    Navigator.of(context, rootNavigator: true).pop();
     if (res.isSuccess) {
       orderList = OrderListModel.fromJson(res.data);
-      setState(() {    //更新ui
-
+      setState(() {
+        //更新ui
       });
     } else {
       Fluttertoast.showToast(msg: res.data.toString());
